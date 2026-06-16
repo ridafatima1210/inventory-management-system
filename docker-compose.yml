@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: inventory_db
+    restart: always
+    environment:
+      POSTGRES_USER: engine_user
+      POSTGRES_PASSWORD: enterprise_secure_pass_2026
+      POSTGRES_DB: inventory_matrix
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: inventory_backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://engine_user:enterprise_secure_pass_2026@db:5432/inventory_matrix
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: inventory_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
