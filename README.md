@@ -234,27 +234,6 @@ docker-compose up --build
 
 ---
 
-## Screenshots
-
-### Dashboard
-- Inventory statistics
-- Customer metrics
-- Order tracking
-
-### Products
-- Product creation
-- Product inventory management
-
-### Customers
-- Customer registration
-- Customer records management
-
-### Orders
-- Order placement
-- Inventory updates
-
----
-
 ## Key Business Rules
 
 ### Inventory Validation
